@@ -2,8 +2,8 @@
 
 typedef struct entity_t {
 	float x, y, w, h, dx, dy;
-	char type;
-	int frame, life;
+	int frame, life, type, side;
+	double angle;
 	SDL_Rect* current_clip;
 	SDL_Texture* texture;
 	struct entity_t* next;

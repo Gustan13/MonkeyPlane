@@ -34,7 +34,7 @@ void process_input()
 	{
 		if (reload <= 0 && !dead)
 		{
-			spawn_bullet();
+			spawn_bullet(GOOD, BULLET_SPEED, 0, player->x + 32, player->y + 24);
 			reload = RELOAD_TIME;
 		}
 	}

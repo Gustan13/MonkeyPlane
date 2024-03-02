@@ -37,6 +37,10 @@ int load_media()
 	dog_sprite_sheet = load_texture("dog.png");
 	banana_sprite_sheet = load_texture("banana.png");
 	blood_sprite_sheet = load_texture("explosion.png");
+	duck_sprite_sheet = load_texture("duck.png");
+	elephant_sprite_sheet = load_texture("elephant.png");
+	apple_sprite_sheet = load_texture("apple.png");
+	koala_sprite_sheet = load_texture("koala.png");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -56,13 +60,17 @@ int load_media()
 
 void draw_entity(Entity* entity)
 {
-	SDL_Rect rect = { 
+	SDL_Rect rect = {
 		(int)entity->x,
 		(int)entity->y,
 		(int)entity->w,
 		(int)entity->h
 	};
-	SDL_RenderCopy(renderer, entity->texture, entity->current_clip, &rect);
+	SDL_Point point = {entity->x + entity->w / 2, entity->y + entity->h / 2};
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	//SDL_RenderCopy(renderer, entity->texture, entity->current_clip, &rect);
+	SDL_RenderCopyEx(renderer, entity->texture, entity->current_clip, &rect, entity->angle, NULL, flip);
 }
 
 void draw()
@@ -76,7 +84,9 @@ void draw()
 	for (e = stage.fighterHead.next; e != NULL; e = e->next)
 	{
 		if (e != player || !dead)
+		{
 			draw_entity(e);
+		}
 	}
 
 	for (e = stage.bulletHead.next; e != NULL; e = e->next)

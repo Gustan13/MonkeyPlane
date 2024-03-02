@@ -14,26 +14,29 @@ void move_monsters()
 		if (e == player)
 			continue;
 
-		if (e->type == 'i')
+		switch (e->type)
 		{
+		case PENGUIN:
 			e->dy += (float)0.51;
 
 			if (e->frame % 32 == 0)
 			{
 				e->dy = -PENGUIN_JUMP_SET;
 			}
-		}
-		else if (e->type == 'd')
-		{
+			break;
+		case DOG:
 			if (!dead)
 			{
 				float exp = (player->y - e->y) / 80;
 				exp < 0 ? (exp *= -1) : (exp *= 1);
 
-				e->y < player->y ? (e->dy = (float)(1.5 * exp)) : (e->dy = (float)(- 1.5 * exp));
+				e->y < player->y ? (e->dy = (float)(1.5 * exp)) : (e->dy = (float)(-1.5 * exp));
 			}
 			else
 				e->dy = 0;
+			break;
+		default:
+			break;
 		}
 
 		e->x += e->dx;
@@ -53,8 +56,9 @@ void move_bullets()
 	for (e = stage.bulletHead.next; e != NULL; e = e->next)
 	{
 		e->x += e->dx;
+		e->y += e->dy;
 
-		if (e->x > SCREEN_WIDTH)
+		if (e->x > SCREEN_WIDTH || e->y < -64 || e->x < -64)
 		{
 			if (stage.bulletTail == e)
 				stage.bulletTail = prev;
@@ -122,7 +126,7 @@ void monster_bullet_collision()
 				b->y,
 				b->w,
 				b->h
-			))
+			) && a->side == GOOD)
 			{
 				spawn_blood(a->x, a->y);
 
@@ -144,6 +148,45 @@ void monster_bullet_collision()
 	}
 }
 
+void player_bullet_collision()
+{
+	Entity* a, *prev;
+
+	prev = &stage.bulletHead;
+
+	if (dead)
+		return;
+
+	for (a = stage.bulletHead.next; a != NULL; a = a->next)
+	{
+		if (a->side == GOOD)
+			continue;
+
+		if (collided(
+			player->x,
+			player->y,
+			player->w,
+			player->h,
+			a->x,
+			a->y,
+			a->w,
+			a->h
+		))
+		{
+			dead++;
+			spawn_blood(player->x, player->y);
+
+			printf("collided\n");
+
+			prev->next = a->next;
+			free(a);
+			break;
+		}
+
+		prev = a;
+	}
+}
+
 void init_player()
 {
 	player = malloc(sizeof(Entity));
@@ -157,7 +200,7 @@ void init_player()
 	player->h = 64;
 	player->dx = 0;
 	player->dy = 0;
-	player->type = 'p';
+	player->type = PLAYER;
 
 	player->texture = player_sprite_sheet;
 	player->current_clip = &uni_sprite_clips[0];
