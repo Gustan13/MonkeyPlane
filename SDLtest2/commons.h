@@ -17,6 +17,7 @@
 #include "input.h"
 #include "spawn.h"
 #include "animation.h"
+#include "levelreader.h"
 
 SDL_Window* window;
 SDL_Surface* screen;
@@ -30,6 +31,10 @@ SDL_Texture* player_sprite_sheet;
 SDL_Texture* dog_sprite_sheet;
 SDL_Texture* banana_sprite_sheet;
 SDL_Texture* blood_sprite_sheet;
+SDL_Texture* duck_sprite_sheet;
+SDL_Texture* elephant_sprite_sheet;
+SDL_Texture* apple_sprite_sheet;
+SDL_Texture* koala_sprite_sheet;
 
 Entity* player;
 

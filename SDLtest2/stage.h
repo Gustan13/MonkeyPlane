@@ -4,6 +4,8 @@ void move_monsters();
 
 void move_bullets();
 
+void player_bullet_collision();
+
 void player_monster_collision();
 
 void monster_bullet_collision();

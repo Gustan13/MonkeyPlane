@@ -9,6 +9,16 @@ enum sprite_names {
 };
 
 enum type {
+	PLAYER,
+	BULLET,
 	PENGUIN,
-	DOG
+	DOG,
+	DUCK,
+	ELEPHANT,
+	KOALA
+};
+
+enum side {
+	GOOD,
+	BAD
 };

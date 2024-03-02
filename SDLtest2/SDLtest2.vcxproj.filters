@@ -36,6 +36,9 @@
     <ClCompile Include="animation.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="levelreader.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -71,6 +74,9 @@
     <ClInclude Include="animation.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="levelreader.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDLtest2.rc">
@@ -96,5 +102,22 @@
     <Image Include="explosion.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="duck.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="elephant.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="apple.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="koala.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="level_1.isoo">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
 </Project>

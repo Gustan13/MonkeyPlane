@@ -12,6 +12,11 @@ int main(void)
 
 	init_stage();
 
+	if (write_to_file("level_1.isoo") == -1)
+		printf("could not load file\n");
+	if (load_level_file("level_1.isoo") == -1)
+		printf("could not load file\n");
+
 	while (running)
 	{
 		if (restart)
@@ -44,6 +49,7 @@ int main(void)
 		animate_all();
 
 		player_monster_collision();
+		player_bullet_collision();
 		monster_bullet_collision();
 
 		draw();
